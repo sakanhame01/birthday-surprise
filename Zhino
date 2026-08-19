@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بۆ ژینۆ ❤️</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at top, #4b1835 0%, #190916 42%, #070207 100%);
+      color: white;
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: white;
+      border-radius: 50%;
+      opacity: .6;
+      animation: twinkle 2s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      from { opacity: .15; transform: scale(.7); }
+      to { opacity: 1; transform: scale(1.5); }
+    }
+
+    .page {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 25px 15px;
+    }
+
+    .card {
+      width: min(720px, 100%);
+      padding: 42px 25px;
+      text-align: center;
+      border-radius: 30px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 20px 80px rgba(255, 43, 120, .18);
+      backdrop-filter: blur(15px);
+      animation: appear 1.5s ease;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(35px) scale(.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .small {
+      color: #ffc1d7;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 9vw, 75px);
+      margin-bottom: 8px;
+      background: linear-gradient(90deg,#fff,#ff9fc3,#ffd5e5);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .heart-main {
+      font-size: 55px;
+      display: inline-block;
+      animation: heartbeat 1.1s infinite;
+      filter: drop-shadow(0 0 18px #ff3d7f);
+      margin: 12px;
+    }
+
+    @keyframes heartbeat {
+      0%,100% { transform: scale(1); }
+      25% { transform: scale(1.18); }
+      45% { transform: scale(1); }
+      65% { transform: scale(1.14); }
+    }
+
+    .age {
+      margin: 15px auto 25px;
+      font-size: 20px;
+      color: #ffd3e3;
+    }
+
+    .age strong {
+      font-size: 35px;
+      color: #ff7bab;
+    }
+
+    .intro {
+      font-size: 18px;
+      line-height: 2;
+      color: #f9e9ef;
+      margin: 25px auto;
+      max-width: 580px;
+    }
+
+    button {
+      border: none;
+      padding: 15px 32px;
+      border-radius: 50px;
+      font-size: 17px;
+      cursor: pointer;
+      color: white;
+      background: linear-gradient(135deg,#ff2f73,#bd245b);
+      box-shadow: 0 10px 35px rgba(255,47,115,.35);
+      transition: .3s;
+    }
+
+    button:hover {
+      transform: translateY(-3px) scale(1.04);
+    }
+
+    #letter {
+      display: none;
+      margin-top: 32px;
+      padding: 28px 20px;
+      line-height: 2.15;
+      font-size: 18px;
+      border-radius: 22px;
+      background: rgba(0,0,0,.22);
+      animation: letterOpen 1.2s ease;
+    }
+
+    @keyframes letterOpen {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #letter h2 {
+      color: #ff9fc2;
+      margin-bottom: 18px;
+      font-size: 29px;
+    }
+
+    .signature {
+      margin-top: 25px;
+      color: #ffb2cd;
+      font-size: 20px;
+    }
+
+    .floating-heart {
+      position: fixed;
+      bottom: -40px;
+      pointer-events: none;
+      z-index: 1;
+      animation: floatUp linear forwards;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% { opacity: .9; }
+      100% {
+        transform: translateY(-115vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .cake {
+      font-size: 70px;
+      margin: 15px 0;
+      animation: cakeFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes cakeFloat {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .date {
+      margin-top: 30px;
+      font-size: 14px;
+      opacity: .65;
+      direction: ltr;
+    }
+
+    .final {
+      margin-top: 25px;
+      font-size: 24px;
+      color: #ff94ba;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="page">
+  <main class="card">
+
+    <div class="small">✨ 19 • 08 • 2004 ✨</div>
+
+    <h1>ژینۆ</h1>
+
+    <div class="heart-main">❤️</div>
+
+    <div class="cake">🎂</div>
+
+    <div class="age">
+      پیرۆزبایی <strong>22</strong> ساڵەی جوانت 🌹
+    </div>
+
+    <p class="intro">
+      ئەم پەڕەیە تەنها چەند وشە و چەند ئەنیمەیشنێک نییە...
+      <br>
+      هەوڵێکی بچووکە بۆ ئەوەی بڵێم
+      <strong>بوونت گرنگە</strong> و ئەم ڕۆژەش شایەنی ئەوەیە
+      بە شێوەیەکی تایبەت یاد بکرێتەوە.
+    </p>
+
+    <button onclick="openLetter()">
+      نامەیەک بۆ تۆ هەیە 💌
+    </button>
+
+    <section id="letter">
+      <h2>ژینۆی جوان 🌷</h2>
+
+      <p>
+        ئەمڕۆ تەنها ڕۆژێک لە ساڵدا نییە؛
+        ئەمڕۆ یادەوەری ئەو ڕۆژەیە کە کەسێکی جوان
+        هاتە ئەم جیهانە.
+      </p>
+
+      <br>
+
+      <p>
+        هیوادارم ساڵی نوێی تەمەنت پڕ بێت لە ئارامی،
+        خەندەی ڕاستەقینە، سەرکەوتن و ئەو خەونانەی
+        کە دڵت بە نهێنی هەڵیگرتوون.
+      </p>
+
+      <br>
+
+      <p>
+        هیوادارم هەر کاتێک ژیان قورس بوو،
+        هێشتا هۆکارێک بۆ خەندە بدۆزیتەوە؛
+        هەر کاتێک ڕێگاکەت درێژ بوو،
+        هێشتا هیوای گەیشتن لە دڵتدا بمێنێت.
+      </p>
+
+      <br>
+
+      <p>
+        دەمەوێت بزانیت کە هەندێک کەس
+        بەبێ ئەوەی خۆیان بزانن،
+        بە بوونیان جیهانی کەسانی دیکە جوانتر دەکەن...
+        و تۆ یەکێکیت لەو کەسانە. ❤️
+      </p>
+
+      <br>
+
+      <p>
+        بۆ هەموو ئەو خەندانەی کە هێشتا نەخەندویت،
+        بۆ هەموو ئەو خەونانەی کە هێشتا نەگەیشتوویت پێیان،
+        و بۆ هەموو ئەو یادەوەرییە جوانانەی
+        کە هێشتا دروست نەبوون...
+      </p>
+
+      <p class="final">
+        🎉 ڕۆژی لەدایکبوونت پیرۆز بێت ژینۆ 🎉
+      </p>
+
+      <p class="signature">
+        تۆ هەموو کەسی منیت مانگە ڕەشەکەم❤️
+      </p>
+    </section>
+
+    <div class="date">19 / 08 / 2026</div>
+
+  </main>
+</div>
+
+<script>
+  // دروستکردنی ئەستێرەکان
+  const stars = document.getElementById("stars");
+
+  for (let i = 0; i < 90; i++) {
+    const star = document.createElement("span");
+    star.className = "star";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.animationDelay = Math.random() * 3 + "s";
+    star.style.animationDuration = (1 + Math.random() * 3) + "s";
+    stars.appendChild(star);
+  }
+
+  // دڵە فڕیوەکان
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "floating-heart";
+
+    const hearts = ["❤️","💗","💕","🌸","✨"];
+    heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (15 + Math.random() * 25) + "px";
+    heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 10000);
+  }
+
+  setInterval(createHeart, 450);
+
+  // کردنەوەی نامەکە
+  function openLetter() {
+    const letter = document.getElementById("letter");
+    letter.style.display = "block";
+
+    event.target.innerHTML = "بۆ ژینۆ ❤️";
+
+    letter.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+
+    // بارانی دڵ
+    for (let i = 0; i < 25; i++) {
+      setTimeout(createHeart, i * 80);
+    }
+  }
+</script>
+
+</body>
+</html>
