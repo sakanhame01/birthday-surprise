@@ -1,368 +1,976 @@
 <!DOCTYPE html>
-<html lang="ku" dir="rtl">
+<html lang="ckb" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بۆ ژینۆ ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#120918">
+
+  <title>ڕۆژی لەدایکبوونی ژینۆ</title>
+
+  <!-- فۆنتە جوانە کوردییەکان -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;600;700;800;900&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
+    :root {
+      --ink: #fff8ec;
+      --muted: #d8c8d7;
+      --rose: #ff91ad;
+      --rose-dark: #ff4f82;
+      --gold: #f4d58d;
+      --night: #0c0611;
+    }
+
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      background: var(--night);
       overflow-x: hidden;
-      background:
-        radial-gradient(circle at top, #4b1835 0%, #190916 42%, #070207 100%);
-      color: white;
+      font-family: "Noto Kufi Arabic", Tahoma, sans-serif;
     }
 
-    .stars {
+    body::before {
+      content: "";
       position: fixed;
       inset: 0;
+      z-index: -3;
+      background:
+        radial-gradient(circle at 12% 8%, #521934 0, transparent 29%),
+        radial-gradient(circle at 88% 25%, #301d55 0, transparent 32%),
+        linear-gradient(145deg, #08040c, #1a0a1b 48%, #08040c);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      opacity: 0.22;
       pointer-events: none;
-      overflow: hidden;
-      z-index: 0;
+
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
     }
 
-    .star {
-      position: absolute;
-      width: 3px;
+    .progress {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 0;
       height: 3px;
-      background: white;
-      border-radius: 50%;
-      opacity: .6;
-      animation: twinkle 2s infinite alternate;
+      z-index: 100;
+      background: linear-gradient(90deg, var(--rose-dark), var(--gold));
+      box-shadow: 0 0 18px var(--rose);
     }
 
-    @keyframes twinkle {
-      from { opacity: .15; transform: scale(.7); }
-      to { opacity: 1; transform: scale(1.5); }
-    }
+    .nav {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      right: 18px;
+      z-index: 30;
 
-    .page {
-      position: relative;
-      z-index: 2;
-      min-height: 100vh;
       display: flex;
-      justify-content: center;
       align-items: center;
-      padding: 25px 15px;
+      justify-content: space-between;
+
+      pointer-events: none;
     }
 
-    .card {
-      width: min(720px, 100%);
-      padding: 42px 25px;
+    .brand,
+    .sound {
+      color: var(--ink);
+      pointer-events: auto;
+
+      border: 1px solid rgba(244, 213, 141, 0.25);
+      background: rgba(16, 8, 20, 0.58);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+
+      border-radius: 999px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .brand {
+      padding: 9px 16px;
+      font-size: 12px;
+    }
+
+    .sound {
+      width: 45px;
+      height: 45px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+
+    .sound:hover {
+      transform: scale(1.08);
+      border-color: var(--gold);
+    }
+
+    .hero {
+      min-height: 100svh;
+      position: relative;
+      isolation: isolate;
+
+      display: grid;
+      place-items: center;
+
+      padding: 100px 22px 50px;
       text-align: center;
-      border-radius: 30px;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.18);
-      box-shadow: 0 20px 80px rgba(255, 43, 120, .18);
-      backdrop-filter: blur(15px);
-      animation: appear 1.5s ease;
     }
 
-    @keyframes appear {
-      from {
-        opacity: 0;
-        transform: translateY(35px) scale(.95);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+    .halo {
+      position: absolute;
+      z-index: -1;
+
+      width: min(78vw, 720px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(255, 111, 152, 0.17),
+          rgba(130, 71, 161, 0.05) 46%,
+          transparent 69%
+        );
+
+      animation: breathe 5s ease-in-out infinite;
     }
 
-    .small {
-      color: #ffc1d7;
-      letter-spacing: 2px;
-      margin-bottom: 18px;
+    .eyebrow {
+      margin: 0 0 22px;
+      color: var(--gold);
+      font-size: clamp(12px, 2vw, 15px);
+      letter-spacing: 0.1em;
+
+      opacity: 0;
+      animation: rise 0.9s 0.15s forwards;
     }
 
-    h1 {
-      font-size: clamp(38px, 9vw, 75px);
-      margin-bottom: 8px;
-      background: linear-gradient(90deg,#fff,#ff9fc3,#ffd5e5);
-      -webkit-background-clip: text;
+    .hero h1 {
+      margin: 0;
+      line-height: 0.9;
+
+      font-size: clamp(54px, 14vw, 150px);
+      font-weight: 900;
+      letter-spacing: -0.065em;
+
       color: transparent;
+      background: linear-gradient(
+        180deg,
+        #fffdf5 15%,
+        #f8d79a 62%,
+        #c88b52
+      );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.55));
+
+      opacity: 0;
+      animation: rise 1.1s 0.35s forwards;
     }
 
-    .heart-main {
-      font-size: 55px;
-      display: inline-block;
-      animation: heartbeat 1.1s infinite;
-      filter: drop-shadow(0 0 18px #ff3d7f);
-      margin: 12px;
+    .hero h1 span {
+      display: block;
+      margin-bottom: 18px;
+
+      color: var(--rose);
+      -webkit-text-fill-color: var(--rose);
+
+      font-size: 0.24em;
+      font-weight: 500;
+      letter-spacing: 0.04em;
     }
 
-    @keyframes heartbeat {
-      0%,100% { transform: scale(1); }
-      25% { transform: scale(1.18); }
-      45% { transform: scale(1); }
-      65% { transform: scale(1.14); }
+    .date {
+      display: inline-flex;
+      align-items: center;
+      gap: 13px;
+
+      margin: 30px 0 18px;
+      color: var(--muted);
+
+      opacity: 0;
+      animation: rise 1s 0.65s forwards;
     }
 
-    .age {
-      margin: 15px auto 25px;
-      font-size: 20px;
-      color: #ffd3e3;
+    .date i {
+      width: 44px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold));
     }
 
-    .age strong {
-      font-size: 35px;
-      color: #ff7bab;
+    .date i:last-child {
+      transform: rotate(180deg);
     }
 
     .intro {
-      font-size: 18px;
-      line-height: 2;
-      color: #f9e9ef;
-      margin: 25px auto;
-      max-width: 580px;
-    }
+      max-width: 670px;
+      margin: auto;
 
-    button {
-      border: none;
-      padding: 15px 32px;
-      border-radius: 50px;
-      font-size: 17px;
-      cursor: pointer;
-      color: white;
-      background: linear-gradient(135deg,#ff2f73,#bd245b);
-      box-shadow: 0 10px 35px rgba(255,47,115,.35);
-      transition: .3s;
-    }
-
-    button:hover {
-      transform: translateY(-3px) scale(1.04);
-    }
-
-    #letter {
-      display: none;
-      margin-top: 32px;
-      padding: 28px 20px;
+      color: #eee0eb;
+      font-family: "Noto Naskh Arabic", serif;
+      font-size: clamp(18px, 2.5vw, 23px);
       line-height: 2.15;
-      font-size: 18px;
-      border-radius: 22px;
-      background: rgba(0,0,0,.22);
-      animation: letterOpen 1.2s ease;
+
+      opacity: 0;
+      animation: rise 1s 0.8s forwards;
     }
 
-    @keyframes letterOpen {
+    .scroll {
+      margin-top: 38px;
+      color: #c9a8bd;
+      font-size: 12px;
+      animation: floating 2s infinite;
+    }
+
+    .scroll b {
+      display: block;
+      font-size: 25px;
+    }
+
+    .petal {
+      position: fixed;
+      top: -12vh;
+      z-index: 12;
+
+      color: var(--rose);
+      pointer-events: none;
+
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.35));
+      animation: falling linear forwards;
+    }
+
+    .section {
+      position: relative;
+      max-width: 1060px;
+      margin: auto;
+      padding: 100px 24px;
+    }
+
+    .kicker {
+      color: var(--rose);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+    }
+
+    .title {
+      margin: 8px 0 45px;
+      line-height: 1.25;
+
+      font-size: clamp(33px, 6vw, 66px);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+    }
+
+    .glass {
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 32px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.1),
+          rgba(255, 255, 255, 0.025)
+        );
+
+      box-shadow:
+        0 30px 90px rgba(0, 0, 0, 0.45),
+        inset 0 1px rgba(255, 255, 255, 0.1);
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .letter {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(28px, 6vw, 72px);
+    }
+
+    .letter::before {
+      content: "“";
+      position: absolute;
+      top: -35px;
+      left: 28px;
+
+      color: rgba(244, 213, 141, 0.08);
+      font-family: Georgia, serif;
+      font-size: 190px;
+    }
+
+    .letter p {
+      margin: 0 0 24px;
+
+      color: #eee5ed;
+      font-family: "Noto Naskh Arabic", serif;
+      font-size: clamp(18px, 2.5vw, 23px);
+      line-height: 2.25;
+    }
+
+    .signature {
+      margin-top: 38px !important;
+      color: var(--gold) !important;
+      text-align: left;
+      font-weight: 700;
+    }
+
+    .signature span {
+      display: block;
+      color: var(--muted);
+      font-family: "Noto Kufi Arabic", sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      min-height: 240px;
+      padding: 32px 24px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      transition: 0.45s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(244, 213, 141, 0.45);
+    }
+
+    .num {
+      color: var(--gold);
+      opacity: 0.8;
+
+      font-family: Georgia, serif;
+      font-size: 42px;
+      font-style: italic;
+    }
+
+    .card h3 {
+      margin: 14px 0 9px;
+      font-size: 21px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-family: "Noto Naskh Arabic", serif;
+      font-size: 18px;
+      line-height: 1.9;
+    }
+
+    .age-wrap {
+      text-align: center;
+    }
+
+    .age {
+      color: transparent;
+      line-height: 0.85;
+
+      font-size: clamp(92px, 22vw, 210px);
+      font-weight: 900;
+
+      background: linear-gradient(135deg, var(--rose), var(--gold));
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.45));
+    }
+
+    .age-label {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .age-note {
+      max-width: 620px;
+      margin: 26px auto;
+
+      color: #e7d9e4;
+      font-family: "Noto Naskh Arabic", serif;
+      font-size: 20px;
+      line-height: 2;
+    }
+
+    .wish {
+      padding-bottom: 150px;
+      text-align: center;
+    }
+
+    .gift {
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 28px;
+
+      display: grid;
+      place-items: center;
+
+      cursor: pointer;
+      font-size: 45px;
+
+      border: 1px solid rgba(244, 213, 141, 0.42);
+      border-radius: 50%;
+
+      background: radial-gradient(circle, #4a1830, #160a18);
+
+      box-shadow:
+        0 0 0 12px rgba(255, 255, 255, 0.025),
+        0 25px 65px rgba(0, 0, 0, 0.45);
+
+      animation: pulse 2.2s infinite;
+      transition: 0.4s;
+    }
+
+    .gift:hover {
+      transform: rotate(-7deg) scale(1.08);
+    }
+
+    .reveal {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(24px);
+
+      transition:
+        max-height 1.2s ease,
+        opacity 1s,
+        transform 1s;
+    }
+
+    .reveal.open {
+      max-height: 700px;
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal h2 {
+      margin: 14px 0;
+
+      color: var(--gold);
+      font-size: clamp(38px, 8vw, 82px);
+    }
+
+    .reveal p {
+      max-width: 700px;
+      margin: auto;
+
+      color: #eee0e9;
+      font-family: "Noto Naskh Arabic", serif;
+      font-size: 21px;
+      line-height: 2.2;
+    }
+
+    footer {
+      padding: 28px;
+      color: #a98b9e;
+      text-align: center;
+      font-size: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .spark {
+      position: fixed;
+      z-index: 100;
+
+      pointer-events: none;
+      font-size: 20px;
+
+      animation: burst 1.3s ease-out forwards;
+    }
+
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: 1s ease;
+    }
+
+    .reveal-on-scroll.seen {
+      opacity: 1;
+      transform: none;
+    }
+
+    @keyframes rise {
       from {
         opacity: 0;
         transform: translateY(30px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
-    #letter h2 {
-      color: #ff9fc2;
-      margin-bottom: 18px;
-      font-size: 29px;
-    }
-
-    .signature {
-      margin-top: 25px;
-      color: #ffb2cd;
-      font-size: 20px;
-    }
-
-    .floating-heart {
-      position: fixed;
-      bottom: -40px;
-      pointer-events: none;
-      z-index: 1;
-      animation: floatUp linear forwards;
-    }
-
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0;
-      }
-      10% { opacity: .9; }
-      100% {
-        transform: translateY(-115vh) rotate(360deg);
-        opacity: 0;
+    @keyframes breathe {
+      50% {
+        transform: scale(1.13);
+        opacity: 0.72;
       }
     }
 
-    .cake {
-      font-size: 70px;
-      margin: 15px 0;
-      animation: cakeFloat 3s ease-in-out infinite;
+    @keyframes floating {
+      50% {
+        transform: translateY(8px);
+      }
     }
 
-    @keyframes cakeFloat {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    @keyframes pulse {
+      50% {
+        box-shadow:
+          0 0 0 22px rgba(255, 145, 173, 0.04),
+          0 25px 65px rgba(0, 0, 0, 0.45);
+      }
     }
 
-    .date {
-      margin-top: 30px;
-      font-size: 14px;
-      opacity: .65;
-      direction: ltr;
+    @keyframes falling {
+      to {
+        transform:
+          translate3d(var(--drift), 115vh, 0)
+          rotate(680deg);
+
+        opacity: 0.1;
+      }
     }
 
-    .final {
-      margin-top: 25px;
-      font-size: 24px;
-      color: #ff94ba;
+    @keyframes burst {
+      to {
+        transform:
+          translate(var(--x), var(--y))
+          rotate(220deg)
+          scale(0.2);
+
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        min-height: 190px;
+      }
+
+      .section {
+        padding: 76px 18px;
+      }
+
+      .nav {
+        top: 12px;
+        left: 12px;
+        right: 12px;
+      }
+
+      .hero {
+        padding-top: 90px;
+      }
+
+      .letter {
+        border-radius: 24px;
+      }
+
+      .brand {
+        font-size: 10px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+
+      .reveal-on-scroll {
+        opacity: 1;
+        transform: none;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<div class="stars" id="stars"></div>
+  <div class="progress" id="progress"></div>
 
-<div class="page">
-  <main class="card">
+  <nav class="nav">
+    <div class="brand">لە ساکانەوە، بۆ ژینۆ ♡</div>
 
-    <div class="small">✨ 19 • 08 • 2004 ✨</div>
-
-    <h1>ژینۆ</h1>
-
-    <div class="heart-main">❤️</div>
-
-    <div class="cake">🎂</div>
-
-    <div class="age">
-      پیرۆزبایی <strong>22</strong> ساڵەی جوانت 🌹
-    </div>
-
-    <p class="intro">
-      ئەم پەڕەیە تەنها چەند وشە و چەند ئەنیمەیشنێک نییە...
-      <br>
-      هەوڵێکی بچووکە بۆ ئەوەی بڵێم
-      <strong>بوونت گرنگە</strong> و ئەم ڕۆژەش شایەنی ئەوەیە
-      بە شێوەیەکی تایبەت یاد بکرێتەوە.
-    </p>
-
-    <button onclick="openLetter()">
-      نامەیەک بۆ تۆ هەیە 💌
+    <button
+      class="sound"
+      id="sound"
+      aria-label="کردنەوەی مۆسیقا"
+    >
+      ♫
     </button>
+  </nav>
 
-    <section id="letter">
-      <h2>ژینۆی جوان 🌷</h2>
+  <header class="hero">
+    <div class="halo"></div>
 
-      <p>
-        ئەمڕۆ تەنها ڕۆژێک لە ساڵدا نییە؛
-        ئەمڕۆ یادەوەری ئەو ڕۆژەیە کە کەسێکی جوان
-        هاتە ئەم جیهانە.
+    <div>
+      <p class="eyebrow">
+        ئەمڕۆ، جیهان جوانترە چونکە تۆی تێدای
       </p>
 
-      <br>
+      <h1>
+        <span>ڕۆژی لەدایکبوونت پیرۆز</span>
+        ژینۆ
+      </h1>
 
-      <p>
-        هیوادارم ساڵی نوێی تەمەنت پڕ بێت لە ئارامی،
-        خەندەی ڕاستەقینە، سەرکەوتن و ئەو خەونانەی
-        کە دڵت بە نهێنی هەڵیگرتوون.
+      <div class="date">
+        <i></i>
+        <strong>١٨ · ٨ · ٢٠٠٤</strong>
+        <i></i>
+      </div>
+
+      <p class="intro">
+        ئەم پەڕەیە تەنها وێبسایتێک نییە؛
+        کۆمەڵێک وشەیە کە دڵم ویستی بە جوانترین شێوە بگاتە دڵت.
       </p>
 
-      <br>
+      <div class="scroll">
+        بۆ خوارەوە بڕۆ
+        <b>⌄</b>
+      </div>
+    </div>
+  </header>
 
+  <section class="section reveal-on-scroll">
+    <p class="kicker">نامەیەک لە دڵەوە</p>
+
+    <h2 class="title">ژینۆی ئازیز،</h2>
+
+    <article class="glass letter">
       <p>
-        هیوادارم هەر کاتێک ژیان قورس بوو،
-        هێشتا هۆکارێک بۆ خەندە بدۆزیتەوە؛
-        هەر کاتێک ڕێگاکەت درێژ بوو،
-        هێشتا هیوای گەیشتن لە دڵتدا بمێنێت.
+        لە ڕۆژێکی وەک ئەمڕۆدا، مرۆڤێکی جوان هاتە ئەم جیهانە؛
+        مرۆڤێک کە بوونی بۆ خۆی چیرۆکێکە لە میهرەبانی،
+        جوانی و هیوا.
       </p>
 
-      <br>
-
       <p>
-        دەمەوێت بزانیت کە هەندێک کەس
-        بەبێ ئەوەی خۆیان بزانن،
-        بە بوونیان جیهانی کەسانی دیکە جوانتر دەکەن...
-        و تۆ یەکێکیت لەو کەسانە. ❤️
+        دەمەوێت بزانیت کە تۆ تەنها ساڵێکی ترت زیاد نەکردووە؛
+        بەڵکوو ساڵێکی ترت پڕ کردووە لە یادەوەری،
+        پێکەنین، خەون و هەستە جوانەکان.
+        هەر پێکەنینێکت ڕۆشناییەکە و
+        هەر قسەیەکت نیشانەی دڵێکی پاکە.
       </p>
 
-      <br>
-
       <p>
-        بۆ هەموو ئەو خەندانەی کە هێشتا نەخەندویت،
-        بۆ هەموو ئەو خەونانەی کە هێشتا نەگەیشتوویت پێیان،
-        و بۆ هەموو ئەو یادەوەرییە جوانانەی
-        کە هێشتا دروست نەبوون...
-      </p>
-
-      <p class="final">
-        🎉 ڕۆژی لەدایکبوونت پیرۆز بێت ژینۆ 🎉
+        لە خوا دەخوازم ئەم ساڵەی نوێی تەمەنت
+        ببێتە دەستپێکی جوانترین بەشی ژیانت؛
+        ساڵێک کە خەونەکانت یەک بە یەک ببنە ڕاستی،
+        دڵت ئارام بێت و پێکەنین لەسەر لێوەکانت
+        هەرگیز کەم نەبێتەوە.
       </p>
 
       <p class="signature">
-        تۆ هەموو کەسی منیت مانگە ڕەشەکەم❤️
+        بە هەموو ڕێز و خۆشەویستییەوە — ساکان
+
+        <span>
+          ئەو هاوڕێیەی کە بە بوونت دڵخۆشە
+        </span>
       </p>
-    </section>
+    </article>
+  </section>
 
-    <div class="date">19 / 08 / 2026</div>
+  <section class="section reveal-on-scroll">
+    <p class="kicker">سێ ئاوات بۆ تۆ</p>
 
-  </main>
-</div>
+    <h2 class="title">
+      بۆ ساڵێکی پڕ لە ڕووناکی
+    </h2>
 
-<script>
-  // دروستکردنی ئەستێرەکان
-  const stars = document.getElementById("stars");
+    <div class="cards">
 
-  for (let i = 0; i < 90; i++) {
-    const star = document.createElement("span");
-    star.className = "star";
-    star.style.left = Math.random() * 100 + "%";
-    star.style.top = Math.random() * 100 + "%";
-    star.style.animationDelay = Math.random() * 3 + "s";
-    star.style.animationDuration = (1 + Math.random() * 3) + "s";
-    stars.appendChild(star);
-  }
+      <article class="glass card">
+        <span class="num">١</span>
 
-  // دڵە فڕیوەکان
-  function createHeart() {
-    const heart = document.createElement("div");
-    heart.className = "floating-heart";
+        <div>
+          <h3>دڵێکی ئارام</h3>
 
-    const hearts = ["❤️","💗","💕","🌸","✨"];
-    heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+          <p>
+            هیچ شتێک نەبێتە هۆی ئەوەی
+            ئارامیی دڵت لێ بسەنێتەوە.
+          </p>
+        </div>
+      </article>
 
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (15 + Math.random() * 25) + "px";
-    heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+      <article class="glass card">
+        <span class="num">٢</span>
 
-    document.body.appendChild(heart);
+        <div>
+          <h3>خەونی بەدی‌هاتوو</h3>
 
-    setTimeout(() => {
-      heart.remove();
-    }, 10000);
-  }
+          <p>
+            هەرچی خەون و ئامانجت هەیە،
+            بە جوانترین شێوە ببێتە ڕاستی.
+          </p>
+        </div>
+      </article>
 
-  setInterval(createHeart, 450);
+      <article class="glass card">
+        <span class="num">٣</span>
 
-  // کردنەوەی نامەکە
-  function openLetter() {
-    const letter = document.getElementById("letter");
-    letter.style.display = "block";
+        <div>
+          <h3>پێکەنینی هەمیشەیی</h3>
 
-    event.target.innerHTML = "بۆ ژینۆ ❤️";
+          <p>
+            پێکەنینە جوانەکەت هەمیشە
+            لەسەر لێوەکانت بمێنێتەوە.
+          </p>
+        </div>
+      </article>
 
-    letter.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
+    </div>
+  </section>
+
+  <section class="section age-wrap reveal-on-scroll">
+    <p class="kicker">
+      بەهاری بیست‌ودووەم
+    </p>
+
+    <div class="age">٢٢</div>
+
+    <div class="age-label">
+      ساڵ لە جوانی، هیوا و یادەوەری
+    </div>
+
+    <p class="age-note">
+      لە ١٨ی ئابی ٢٠٠٤ەوە تا ئەمڕۆ،
+      هەر ساڵێک لاپەڕەیەکی جوانی چیرۆکی تۆ بووە؛
+      بەڵام دڵنیام جوانترین لاپەڕەکان
+      هێشتا نەنووسراون.
+    </p>
+  </section>
+
+  <section class="section wish reveal-on-scroll">
+    <p class="kicker">کۆتا سوپرایز</p>
+
+    <h2 class="title">
+      کلیک لە دیارییەکە بکە
+    </h2>
+
+    <button
+      class="gift"
+      id="gift"
+      aria-label="کردنەوەی دیاری"
+    >
+      🎁
+    </button>
+
+    <div class="reveal" id="reveal">
+      <h2>
+        ژینۆ، ڕۆژت پیرۆز! ✨
+      </h2>
+
+      <p>
+        هیوادارم ئەم ڕۆژە بە قەدەر دڵت جوان،
+        بە قەدەر پێکەنینت شیرین و
+        بە قەدەر خەونەکانت گەورە بێت.
+        تۆ شایستەی هەموو جوانییەکانی ئەم جیهانەیت.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    بە خۆشەویستییەوە دروستکراوە لەلایەن ساکان ♡ ٢٠٢٦
+  </footer>
+
+  <script>
+    const $ = (selector) => document.querySelector(selector);
+
+    /* نیشاندانی ئاستی سکرۆڵ */
+    window.addEventListener("scroll", () => {
+      const page = document.documentElement;
+
+      const percentage =
+        page.scrollTop /
+        (page.scrollHeight - page.clientHeight) *
+        100;
+
+      $("#progress").style.width = percentage + "%";
     });
 
-    // بارانی دڵ
-    for (let i = 0; i < 25; i++) {
-      setTimeout(createHeart, i * 80);
+    /* دەرکەوتنی بەشەکان لە کاتی سکرۆڵ */
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("seen");
+          }
+        });
+      },
+      {
+        threshold: 0.13
+      }
+    );
+
+    document
+      .querySelectorAll(".reveal-on-scroll")
+      .forEach((element) => observer.observe(element));
+
+    /* دڵ و گوڵە جووڵاوەکان */
+    function createPetal() {
+      const element = document.createElement("span");
+
+      element.className = "petal";
+
+      const shapes = ["♥️", "✦", "✿", "❀"];
+
+      element.textContent =
+        shapes[Math.floor(Math.random() * shapes.length)];
+
+      element.style.left =
+        Math.random() * 100 + "vw";
+
+      element.style.fontSize =
+        10 + Math.random() * 16 + "px";
+
+      element.style.opacity =
+        0.25 + Math.random() * 0.55;
+
+      element.style.setProperty(
+        "--drift",
+        Math.random() * 180 - 90 + "px"
+      );
+
+      element.style.animationDuration =
+        7 + Math.random() * 8 + "s";
+
+      document.body.appendChild(element);
+
+      setTimeout(() => {
+        element.remove();
+      }, 16000);
     }
-  }
-</script>
+
+    setInterval(createPetal, 650);
+
+    /* سوپرایزی دیارییەکە */
+    $("#gift").addEventListener("click", (event) => {
+      const reveal = $("#reveal");
+
+      reveal.classList.add("open");
+      event.currentTarget.textContent = "💝";
+
+      for (let i = 0; i < 38; i++) {
+        const spark = document.createElement("i");
+
+        spark.className = "spark";
+
+        const shapes = ["♥️", "✦", "✧", "❀"];
+        spark.textContent = shapes[i % shapes.length];
+
+        spark.style.left = event.clientX + "px";
+        spark.style.top = event.clientY + "px";
+
+        spark.style.color =
+          i % 2 ? "#f4d58d" : "#ff91ad";
+
+        spark.style.setProperty(
+          "--x",
+          Math.random() * 360 - 180 + "px"
+        );
+
+        spark.style.setProperty(
+          "--y",
+          Math.random() * -300 + 80 + "px"
+        );
+
+        document.body.appendChild(spark);
+
+        setTimeout(() => {
+          spark.remove();
+        }, 1400);
+      }
+
+      setTimeout(() => {
+        reveal.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      }, 250);
+    });
+
+    /* مۆسیقای ئارام */
+    let audioContext;
+    let playing = false;
+
+    $("#sound").addEventListener("click", () => {
+      if (!audioContext) {
+        const AudioContext =
+          window.AudioContext || window.webkitAudioContext;
+
+        audioContext = new AudioContext();
+
+        const master = audioContext.createGain();
+
+        master.gain.value = 0.035;
+        master.connect(audioContext.destination);
+
+        const notes = [
+          261.63,
+          329.63,
+          392,
+          523.25
+        ];
+
+        notes.forEach((frequency, index) => {
+          const oscillator =
+            audioContext.createOscillator();
+
+          const gain =
+            audioContext.createGain();
+
+          oscillator.type = "sine";
+          oscillator.frequency.value = frequency;
+          gain.gain.value = 0.18 / (index + 1);
+
+          oscillator.connect(gain);
+          gain.connect(master);
+          oscillator.start();
+        });
+      }
+
+      playing = !playing;
+
+      if (playing) {
+        audioContext.resume();
+        $("#sound").textContent = "♪";
+      } else {
+        audioContext.suspend();
+        $("#sound").textContent = "♫";
+      }
+    });
+  </script>
 
 </body>
 </html>
